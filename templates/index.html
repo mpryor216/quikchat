@@ -1,0 +1,60 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuikChat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div id="chat-container">
+
+        <h1>
+            QuikChat
+        </h1>
+    
+        <div id="chat">
+            {% for msg in messages %}
+                <p>
+                    <strong>{{ msg.username }}:</strong> {{ msg.message|safe }}<br>
+                    <span class="timestamp">{{ msg.timestamp.strftime('%Y-%m-%d %I:%M %p') }}</span>
+                </p>
+            {% endfor %}
+        </div>
+
+        <form id="message-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required autocomplete="off">
+            <br>
+            <label for="message">Message:</label>
+            <input type="text" id="message" name="message" required autocomplete="off">
+            <br>
+            <button type="submit">Send</button>
+        </form>
+
+        <div id="clear-chat">
+            <a href="/clear_chat">Clear Chat</a>
+        </div>
+
+        <div id="color-scheme-selector">
+            <select id="color-scheme">
+                <option value="Ocean Blue">Ocean Blue</option>
+                <option value="Sunset Red">Sunset Red</option>
+                <option value="Forest Green">Forest Green</option>
+                <option value="Bubblegum Pink">Bubblegum Pink</option>
+                <option value="Canary Yellow">Canary Yellow</option>
+            </select>
+        </div>
+        
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+</html>
