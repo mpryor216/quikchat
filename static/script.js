@@ -128,7 +128,7 @@ $(document).ready(function () {
             url: '/',
             success: function (response) {
                 // Replace the entire chat content with the updated content
-                $('#chat').html(response);
+                $('#chat-container').html(response);
             },
             error: function (error) {
                 console.log(error);
