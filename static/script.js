@@ -121,14 +121,20 @@ $(document).ready(function () {
     // Initialize with the default color scheme
     updateColorScheme('Ocean Blue');
 
-    // Function to refresh the chat content        
+    // Function to refresh the chat content
     function refreshChat() {
         $.ajax({
             type: 'GET',
-            url: '/',
+            url: '/get_messages',
             success: function (response) {
-                // Replace the entire chat content with the updated content
-                $('#chat-container').html(response);
+                // Clear the existing chat content
+                $('#chat').empty();
+                
+                // Append the updated messages to the chat container
+                for (var i = 0; i < response.length; i++) {
+                    var msg = response[i];
+                    $('#chat').append('<p><strong>' + msg.username + ':</strong> ' + msg.message + '<br><span class="timestamp">' + msg.timestamp + '</span></p>');
+                }
             },
             error: function (error) {
                 console.log(error);

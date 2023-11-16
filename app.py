@@ -65,3 +65,13 @@ def clear_chat():
 
     # Return a JSON response to indicate the chat has been cleared
     return jsonify({'status': 'Chat cleared', 'username': username, 'timestamp': timestamp})
+
+@app.route('/get_messages', methods=['GET'])
+def get_messages():
+    # Retrieve messages from the database
+    messages = Message.query.all()
+    
+    # Convert messages to a list of dictionaries
+    messages_list = [{'username': msg.username, 'message': msg.message, 'timestamp': msg.timestamp.strftime('%Y-%m-%d %I:%M %p')} for msg in messages]
+    
+    return jsonify(messages_list)
