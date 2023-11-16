@@ -120,4 +120,25 @@ $(document).ready(function () {
 
     // Initialize with the default color scheme
     updateColorScheme('Ocean Blue');
+
+    // Function to refresh the chat content        
+    function refreshChat() {
+        $.ajax({
+            type: 'GET',
+            url: '/',
+            success: function (response) {
+                // Replace the entire chat content with the updated content
+                $('#chat').html(response);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    // Refresh the chat every 5 seconds
+    setInterval(refreshChat, 5000);
+
+    // additional code goes under this line
+
 });
