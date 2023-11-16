@@ -143,7 +143,7 @@ $(document).ready(function () {
     }
 
     // Refresh the chat every 5 seconds
-    setInterval(refreshChat, 5000);
+    setInterval(refreshChat, 500);
 
     // additional code goes under this line
 
