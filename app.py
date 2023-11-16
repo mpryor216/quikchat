@@ -1,4 +1,4 @@
-# app.py
+ # app.py
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO
@@ -6,11 +6,11 @@ from datetime import datetime
 from bleach import linkify
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chat.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chat.db' # 'mysql+mysqlconnector://mpryor:mysqlpass@localhost:3306/mpryor216$quickchat'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable tracking modifications for SQLAlchemy
 app.config['SECRET_KEY'] = 'secret_key'
 db = SQLAlchemy(app)
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Define the Message model
 class Message(db.Model):
@@ -26,7 +26,7 @@ def create_tables():
 with app.app_context():
     create_tables()
 
-@app.route('/')
+@app.route('/') 
 def index():
     # Retrieve messages from the database
     messages = Message.query.all()
@@ -65,6 +65,3 @@ def clear_chat():
 
     # Return a JSON response to indicate the chat has been cleared
     return jsonify({'status': 'Chat cleared', 'username': username, 'timestamp': timestamp})
-
-if __name__ == '__main__':
-    socketio.run(app, debug=True)
