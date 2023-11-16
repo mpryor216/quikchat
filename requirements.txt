@@ -42,7 +42,6 @@ pynput==1.7.6
 python-dateutil==2.8.2
 python-engineio==4.8.0
 python-socketio==5.10.0
-pywin32==306
 pyzmq==25.1.1
 requests==2.31.0
 simple-websocket==1.0.0
